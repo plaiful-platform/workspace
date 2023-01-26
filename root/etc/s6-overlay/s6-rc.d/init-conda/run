@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+
+if [ ! -d ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME} ]; then
+    echo "Creating plaiful conda environment dir"
+    mkdir -p ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}
+
+    echo "Creating plaiful conda environment"
+    conda create -n ${PLAIFUL_CONDA_ENV_NAME} -y
+fi

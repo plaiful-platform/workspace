@@ -13,6 +13,7 @@ ENV WP_PREFIX /
 ENV HOME /home/$WP_USER
 ENV CONDA_DIR /opt/conda
 ENV PATH "${CONDA_DIR}/bin:${PATH}"
+ENV PLAIFUL_CONDA_ENV_NAME "plaiful"
 
 # add user
 RUN useradd -M -s /bin/bash -N -u ${WP_UID} ${WP_USER} \
@@ -54,8 +55,8 @@ RUN curl -sL "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/${KUBECTL_A
 RUN mkdir -p ${CONDA_DIR} \
  && echo ". /opt/conda/etc/profile.d/conda.sh" >> ${HOME}/.bashrc \
  && echo ". /opt/conda/etc/profile.d/conda.sh" >> /etc/profile \
- && echo "conda activate base" >> ${HOME}/.bashrc \
- && echo "conda activate base" >> /etc/profile \
+ && echo "conda activate ${PLAIFUL_CONDA_ENV_NAME}" >> ${HOME}/.bashrc \
+ && echo "conda activate ${PLAIFUL_CONDA_ENV_NAME}" >> /etc/profile \
  && chown -R ${WP_USER}:users ${CONDA_DIR} \
  && chown -R ${WP_USER}:users ${HOME}
 
@@ -97,7 +98,8 @@ RUN chown -R ${WP_UID}:users /etc/s6-overlay \
   && chown -R ${WP_UID}:users /opt/ssh
 
 RUN chmod +x /etc/s6-overlay/s6-rc.d/init-openssh/run \
-  &&chmod +x /usr/local/bin/add_authorized_key.sh
+  && chmod +x /etc/s6-overlay/s6-rc.d/init-conda/run \
+  && chmod +x /usr/local/bin/add_authorized_key.sh
 
 USER ${WP_UID}
 
