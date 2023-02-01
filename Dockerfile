@@ -3,9 +3,7 @@ FROM ubuntu
 ARG S6_OVERLAY_VERSION=3.1.3.0
 ARG S6_ARCH="x86_64"
 ARG MINIFORGE_ARCH="x86_64"
-ARG MINIFORGE_VERSION=4.10.1-4
-ARG PIP_VERSION=21.1.2
-ARG PYTHON_VERSION=3.8.10
+ARG MINIFORGE_VERSION=22.9.0-3
 
 ENV WP_USER plaiful
 ENV WP_UID 1000
@@ -69,7 +67,6 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
  && conda config --system --set auto_update_conda false \
  && conda config --system --set show_channel_urls true \
  && echo "conda ${MINIFORGE_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
- && echo "python ${PYTHON_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
  && conda update -y -q --all \
  && conda clean -a -f -y \
  && chown -R ${WP_USER}:users ${CONDA_DIR} \

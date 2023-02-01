@@ -7,3 +7,4 @@ In heavy development
 
 ## TODO
 * Add mutagen client to image
+* Add brew to image
