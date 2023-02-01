@@ -7,3 +7,6 @@ if [ ! -d ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME} ]; then
     echo "Creating plaiful conda environment"
     conda create -n ${PLAIFUL_CONDA_ENV_NAME} -y
 fi
+
+grep -qxF '. /opt/conda/etc/profile.d/conda.sh' ${HOME}/.bashrc|| echo '. /opt/conda/etc/profile.d/conda.sh' >> ${HOME}/.bashrc
+grep -qxF "conda activate ${PLAIFUL_CONDA_ENV_NAME}" ${HOME}/.bashrc|| echo "conda activate ${PLAIFUL_CONDA_ENV_NAME}" >> ${HOME}/.bashrc
