@@ -8,5 +8,26 @@ if [ ! -d ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME} ]; then
     conda create -n ${PLAIFUL_CONDA_ENV_NAME} -y
 fi
 
+echo "Setting up .bashrc"
 grep -qxF '. /opt/conda/etc/profile.d/conda.sh' ${HOME}/.bashrc|| echo '. /opt/conda/etc/profile.d/conda.sh' >> ${HOME}/.bashrc
 grep -qxF "conda activate ${PLAIFUL_CONDA_ENV_NAME}" ${HOME}/.bashrc|| echo "conda activate ${PLAIFUL_CONDA_ENV_NAME}" >> ${HOME}/.bashrc
+
+if [ ! -d ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/activate.d ]; then
+    echo "Creating directory: ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/activate.d"
+    mkdir -p ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/activate.d
+fi
+
+if [ ! -d ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/deactivate.d ]; then
+    echo "Creating directory: ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/deactivate.d"
+    mkdir -p ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/deactivate.d
+fi
+
+if [ ! -f ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/activate.d/env_vars.sh ]; then
+    echo "Setting up ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/activate.d/env_vars.sh"
+    cp /opt/plaiful/activate_env_vars.sh ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/activate.d/env_vars.sh
+fi
+
+if [ ! -f ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/deactivate.d/env_vars.sh ]; then
+    echo "Setting up ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/deactivate.d/env_vars.sh"
+    cp /opt/plaiful/deactivate_env_vars.sh ${CONDA_DIR}/envs/${PLAIFUL_CONDA_ENV_NAME}/etc/conda/deactivate.d/env_vars.sh
+fi

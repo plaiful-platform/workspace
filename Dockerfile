@@ -12,6 +12,7 @@ ENV HOME /home/$WP_USER
 ENV CONDA_DIR /opt/conda
 ENV PATH "${CONDA_DIR}/bin:${PATH}"
 ENV PLAIFUL_CONDA_ENV_NAME "plaiful"
+ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME 0
 
 # add user
 RUN useradd -M -s /bin/bash -N -u ${WP_UID} ${WP_USER} \
@@ -88,6 +89,8 @@ COPY root /
 
 COPY ./config/sshd_config /opt/ssh/sshd_config
 COPY ./scripts/add_authorized_key.sh /usr/local/bin
+COPY ./scripts/activate_env_vars.sh /opt/plaiful/
+COPY ./scripts/deactivate_env_vars.sh /opt/plaiful/
 
 RUN mkdir -p /opt/ssh/
 
@@ -96,7 +99,9 @@ RUN chown -R ${WP_UID}:users /etc/s6-overlay \
 
 RUN chmod +x /etc/s6-overlay/s6-rc.d/init-openssh/run \
   && chmod +x /etc/s6-overlay/s6-rc.d/init-conda/run \
-  && chmod +x /usr/local/bin/add_authorized_key.sh
+  && chmod +x /usr/local/bin/add_authorized_key.sh \
+  && chmod +x /opt/plaiful/activate_env_vars.sh \
+  && chmod +x /opt/plaiful/deactivate_env_vars.sh
 
 USER ${WP_UID}
 
