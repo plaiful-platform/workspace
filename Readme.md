@@ -1,10 +1,14 @@
-# Plaiful Workspace Base Image
+# Plaiful Workspace Image
 
 The default workspace image for the plaiful platform. 
 
 In heavy development
 
+## Authors
 
-## TODO
-* Add mutagen client to image
-* Add brew to image
+Sebastian Alberternst <sebastian.alberternst@dfki.de>
+
+## License
+
+MIT 
+
