@@ -1,0 +1,25 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image: ghcr.io/plaiful-platform/workspace:latest
+# imageGpu: ghcr.io/plaiful-platform/workspace-gpu:latest
+
+requests:
+  cpu: 500m
+  gpu: 0
+  memory: 1Gi
+limits:
+  cpu: 600m
+  memory: 1.2Gi 
+
+homeVolume: 
+  accessModes: 
+    - ReadWriteOnce
+  size: 25Gi
+
+condaEnvVolume: 
+  accessModes: 
+    - ReadWriteOnce
+  size: 25Gi
+
+additionalVolumes: []
