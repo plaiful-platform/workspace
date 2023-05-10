@@ -98,4 +98,6 @@ RUN chmod +x /etc/s6-overlay/s6-rc.d/init-conda/run \
 
 USER ${WP_UID}
 
+WORKDIR ${HOME}
+
 ENTRYPOINT ["/init"]
