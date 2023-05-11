@@ -3,12 +3,12 @@ entries:
   workspace:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-05-11T13:55:42.412833+02:00"
+    created: "2023-05-11T16:06:38.321421+02:00"
     description: A Helm chart for Kubernetes
-    digest: c0b534c8cc82b1828df0c07d290c7e6de8e3fb07f85bf7fe28947aa36b770953
+    digest: f16c0066d416463e24a30414ebe14c699ca243899537aef16daf395f1ed64680
     name: workspace
     type: application
     urls:
     - workspace-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-11T13:55:42.410828+02:00"
+generated: "2023-05-11T16:06:38.318639+02:00"
