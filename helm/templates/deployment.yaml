@@ -31,21 +31,15 @@ spec:
         ports:
         - containerPort: 2222
         volumeMounts:
-        - mountPath: /home/asdasd
+        - mountPath: /home/plaiful
           name: {{ .Release.Name }}-home
-        - mountPath: /opt/conda/env
+        - mountPath: /opt/conda/plaiful
           name: {{ .Release.Name }}-conda-env
         {{- range $index, $additionalVolume := .Values.additionalVolumes }}
         {{- $result := (mustRegexSplit ":" $additionalVolume 2) }}
         - mountPath: {{index $result 1}}
           name: {{index $result 0}}-volume
         {{- end }}  
-        - mountPath: /opt/ssh/ssh_host_keys/ssh_host_rsa_key
-          subPath: ssh-host-rsa-key
-          name: ssh-keys-volume
-        - mountPath: /opt/ssh/ssh_host_keys/ssh_host_ecdsa_key
-          subPath: ssh-host-ecdsa-key
-          name: ssh-keys-volume
         resources:
           limits:
             {{- if gt (int $gpu) 0}}
@@ -77,6 +71,3 @@ spec:
         persistentVolumeClaim:
           claimName: {{index $result 0}}
       {{- end }} 
-      - name: ssh-keys-volume
-        secret:
-          secretName: {{ .Release.Name }}
