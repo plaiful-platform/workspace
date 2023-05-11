@@ -33,7 +33,7 @@ spec:
         volumeMounts:
         - mountPath: /home/plaiful
           name: {{ .Release.Name }}-home
-        - mountPath: /opt/conda/plaiful
+        - mountPath: /opt/conda/envs/plaiful
           name: {{ .Release.Name }}-conda-env
         {{- range $index, $additionalVolume := .Values.additionalVolumes }}
         {{- $result := (mustRegexSplit ":" $additionalVolume 2) }}
